@@ -1,0 +1,216 @@
+<!DBiYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Decimal</th>
+                <th>Octal</th>
+                <th>Hexadecimal</th>
+                <th>Binary</th>
+            </tr>
+        </thead>
+        <tbody id="table">
+        </tbody>
+    </table>
+    <script>
+        const num = document.getElementById('table');
+
+        function convOctal(dec){
+
+            let  octalArr = [];
+            
+            let floorOct = Math.floor(dec / 8);
+
+            function getRemainder(divide = dec){
+            let remainder = divide % 8;
+
+            let remainderString = remainder.toString();
+
+            octalArr.unshift(remainderString);
+            }
+            
+            /* if(floorBi > 0){
+                floorBi = Math.floor(floorBi / 8);
+            } */
+            
+            getRemainder();
+            //console.log(BialArr);
+            
+            if(floorOct == 0){
+                getRemainder(floorOct);
+
+            } else {
+                    while(floorOct > 0){
+                        //console.log(floorBi);
+                        getRemainder(floorOct);
+                        floorOct = Math.floor(floorOct / 8); 
+                      
+                        if(floorOct == 0) break;
+                    } 
+            }
+
+            return octalArr.join("");
+            
+        }
+
+        // convBial(15);
+
+        function convHexdecimal(dec){
+            let  hexaArr = [];
+            
+            let floorHexa = Math.floor(dec / 16);
+
+            function getRemainder(divide = dec){
+            let remainder = divide % 16;
+
+            switch (remainder) {
+                case 10:
+                    remainder = "A";
+                break;
+                case 11:
+                    remainder = "B";
+                break;
+                case 12:
+                    remainder = "C";
+                break;
+                case 13:
+                    remainder = "D";
+                break;
+                case 14:
+                    remainder = "E";
+                break;
+                case 15:
+                    remainder = "F";
+                break;
+                
+            }
+
+            let remainderString = remainder.toString();
+
+            hexaArr.unshift(remainderString);
+            }
+            
+            /* if(floorBi > 0){
+                floorBi = Math.floor(floorBi / 8);
+            } */
+            
+            getRemainder();
+            //console.log(BialArr);
+            
+            if(floorHexa == 0){
+                getRemainder(floorHexa);
+
+            } else {
+                    while(floorHexa > 0){
+                        //console.log(floorBi);
+                        getRemainder(floorHexa);
+                        floorHexa = Math.floor(floorHexa / 16); 
+                      
+                        if(floorHexa == 0) break;
+                    } 
+            }
+
+            return hexaArr.join("");
+        }
+
+        //convHexdecimal(255);
+        
+        function convBinary(dec){
+            let  binaryArr = [];
+            
+            let floorBi = Math.floor(dec / 2);
+
+            function getRemainder(divide = dec){
+            let remainder = divide % 2;
+
+            let remainderString = remainder.toString();
+
+            binaryArr.unshift(remainderString);
+            }
+            
+            /* if(floorBi > 0){
+                floorBi = Math.floor(floorBi / 8);
+            } */
+            
+            getRemainder();
+            //console.log(BialArr);
+            
+            if(floorBi == 0){
+                getRemainder(floorBi);
+
+            } else {
+                    while(floorBi > 0){
+                        //console.log(floorBi);
+                        getRemainder(floorBi);
+                        floorBi = Math.floor(floorBi / 2); 
+                      
+                        if(floorBi == 0) break;
+                    } 
+            }
+
+                let outputBi = binaryArr.join("");
+                for(let i = outputBi.length; i < 8; i++){
+                binaryArr.unshift(0);
+                }
+             
+            return binaryArr.join("");
+        }
+        
+        //convBinary(1);
+
+        for(let i = 0; i < 256; i++){
+            let output = document.createElement('tr');
+
+            output.innerHTML = `<td>${i}</td>
+                                <td>${convOctal(i)}</td>
+                                <td>${convHexdecimal(i)}</td>
+                                <td>${convBinary(i)}</td>`;
+
+            num.appendChild(output);
+
+            //convOctal(i);
+
+            //convHexdecimal(i);
+
+            convBinary(i);
+
+              
+        }
+
+        
+
+        
+        //decimal
+         
+            
+    </script>
+</body>
+</html>
